@@ -9,14 +9,17 @@ const {path, url, ex} = {
   Windows_NT: {path: 'C:\\Windows\\system32\\b2.exe', url: 'https://f000.backblazeb2.com/file/backblazefiles/b2/cli/windows/b2.exe'},
 }[os.type()];
 
-stream.pipeline(
-  https.get(url),
-  fs.createWriteStream(path),
-  err => {
-    if (err) {
-      console.error(err);
-    } else if (ex) {
-      fs.chmodSync(path, 0o555);
+https.get(url, res => {
+  stream.pipeline(
+    res,
+    fs.createWriteStream(path),
+    err => {
+      if (err) {
+        console.error(err);
+      } else if (ex) {
+        fs.chmodSync(path, 0o555);
+      }
     }
-  }
-);
+  );
+});
+
