@@ -1,7 +1,8 @@
 name: 'Set up Backblaze B2 CLI'
-description: 'Download and add the `b2` command to the PATH for GitHub Actions'
-inputs:
-outputs:
+description: 'Download and add the `b2` command to the PATH'
+branding:
+  color: 'red'
+  icon: 'cloud'
 runs:
   using: "composite"
   steps:
