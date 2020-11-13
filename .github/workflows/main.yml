@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./
-      - run: b2
+      - run: b2 version
