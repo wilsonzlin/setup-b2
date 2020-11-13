@@ -1,5 +1,7 @@
-const https = require('https');
+const childProcess = require('child_process');
+const crypto = require('crypto');
 const fs = require('fs');
+const https = require('https');
 const os = require('os');
 const stream = require('stream');
 
@@ -9,15 +11,18 @@ const {path, url, ex} = {
   Windows_NT: {path: 'C:\\Windows\\system32\\b2.exe', url: 'https://f000.backblazeb2.com/file/backblazefiles/b2/cli/windows/b2.exe'},
 }[os.type()];
 
+const outPath = ex ? `/tmp/${crypto.randomBytes(16).toString('hex')}` : path;
+
 https.get(url, res => {
   stream.pipeline(
     res,
-    fs.createWriteStream(path),
+    fs.createWriteStream(outPath),
     err => {
       if (err) {
         console.error(err);
       } else if (ex) {
-        fs.chmodSync(path, 0o555);
+        fs.chmodSync(outPath, 0o555);
+        childProcess.execFileSync('sudo', ['mv', outPath, path]);
       }
     }
   );
