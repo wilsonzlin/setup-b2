@@ -1,7 +1,7 @@
 {
   "name": "setup-b2",
   "private": true,
-  "version": "0.0.1",
+  "version": "3.0.0",
   "description": "Set up GitHub Actions workflow with Backblaze B2 CLI",
   "main": "index.js",
   "repository": {
