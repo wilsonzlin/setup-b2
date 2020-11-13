@@ -1,0 +1,13 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    name: Test b2 command
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+      - run: b2
