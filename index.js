@@ -10,7 +10,7 @@ const {path, url, ex} = {
 }[os.type()];
 
 stream.pipeline(
-  https.get(path),
+  https.get(url),
   fs.createWriteStream(path),
   err => {
     if (err) {
